@@ -1,0 +1,50 @@
+# This workflow executes several linters on changed files based on languages used in your code base whenever
+# you push a code or open a pull request.
+#
+# You can adjust the behavior by modifying this file.
+# For more information, see:
+# https://github.com/github/super-linter
+name: Lint Code Base
+
+on:
+  push:
+    branches: [ "labels" ]
+  pull_request:
+    branches: [ "labels" ]
+jobs:
+  run-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          # Full git history is needed to get a proper list of changed files within `super-linter`
+          fetch-depth: 0
+
+      - name: Lint Code Base
+        uses: github/super-linter@v4
+        env:
+          VALIDATE_ALL_CODEBASE: false
+          DEFAULT_BRANCH: "main"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            Terraform Apply for GorillaStack
+  runs-on:  You may pin to the exact commit or the version.
+   uses: SWO-GS/github-action-apply-on-merge@71fab58db0a839b1e9b34e87601a5e4347c52c88
+   runs-on: ubuntu-latest
+   uses: SWO-GS/github-action-apply-on-merge@v0.1.0
+   with:
+    # The action type (currently "validate" and "apply" are available)
+    action: # default is validate
+    # The name of the tfstate bucket stack
+    stack_name: # default is github-actions-gorillastack-tfstate
+    # The region in which you deployed the tfstate bucket stack
+    aws_default_region: # default is us-east-1
+    # The AWS Access Key Id for the user with privileges to access the tfstate bucket
+    aws_access_key_id: # default is defaulted-for-everything-but-apply
+    # The AWS Secret Access Key for the user with privileges to access the tfstate bucket
+    aws_secret_access_key: # default is defaulted-for-everything-but-apply
+    # GorillaStack API Key, which is read-write or read-only, tied to your user identity
+    gorillastack_api_key: # default is defaulted-for-everything-but-apply
+    # GorillaStack Team Id, sets context of which team/tenant you are targeting
+    gorillastack_team_id: # default is defaulted-for-everything-but-apply
+          
